@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ArticleLayout from "./ArticleLayout.jsx";
 import { articles } from "./generated/catalogue.js";
 import { formatArticleDate } from "./article-format.js";
+import { pageTitle } from "../app/pageMeta.js";
 
 export default function ArticlesIndex() {
   const [params, setParams] = useSearchParams();
@@ -11,7 +12,7 @@ export default function ArticlesIndex() {
   const tags = useMemo(() => [...new Set(articles.flatMap(article => article.tags))].sort(), []);
   const filtered = useMemo(() => articles.filter(article => (!tag || article.tags.includes(tag)) &&
     `${article.title} ${article.summary} ${article.tags.join(" ")}`.toLowerCase().includes(query.trim().toLowerCase())), [query, tag]);
-  useEffect(() => { document.title = "Articles · ronak.sh"; }, []);
+  useEffect(() => { document.title = pageTitle("Articles"); }, []);
   function updateFilter(key, value) {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value); else next.delete(key);

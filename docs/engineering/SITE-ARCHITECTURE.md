@@ -61,6 +61,16 @@ Build with `node node_modules/vite/bin/vite.js build --logLevel warn`. Test the 
 
 This is a navigation task: reuse existing computational lesson evidence. Do not rerun numerical training or rewrite manuscripts. Keep only the final bounded browser report and reviewed screenshots in `docs/engineering/evidence/site-shell/`; discard task-specific scratch captures after review. Preserve unrelated evidence and uncommitted work.
 
+## Page titles and link previews
+
+`src/app/pageMeta.js` is the only source for page titles and descriptions. Home is titled "Ronak Sharma · Data Science Engineer & AI Builder". Every other page uses `pageTitle(...)`, which reads most specific first and ends in "ronak.sh", for example "Paths · Learn · ronak.sh", "Backpropagation & Automatic Differentiation · Learn · ronak.sh" or "Train with a purpose · Build a typed decision model · ronak.sh". Pages set it in the browser.
+
+At build time, `scripts/lib/site-build.mjs` writes the same title, a description of at most 160 characters and a canonical address into an HTML file for every addressable page. That is what search engines and link previews read, since they don't run JavaScript. It covers Home, the sections, Learn views, articles, every lesson under `/learn/topic`, `/learn/track` and `/learn/path`, modules, paths and project stages.
+
+A lesson reachable from several URLs points its canonical at `/learn/topic/<id>`. Lesson descriptions use the authored blueprint summary, trimmed to whole sentences or a clause. Lessons without a summary get a short factual line.
+
+`npm run check:site-build` verifies every entry and fails if the deployment approaches Cloudflare's 20,000-file limit. Entries are `<route>/index.html`. Cloudflare redirects `/route` to `/route/` and serves it. The local `vite preview` server needs the trailing slash to show the per-page title.
+
 ## Repository and Articles ownership
 
 [REPOSITORY-STRUCTURE.md](REPOSITORY-STRUCTURE.md) owns the broader folder/dependency contract and future independent apps. [ARTICLE-AUTHORING.md](../writing/ARTICLE-AUTHORING.md) owns Markdown publishing. Article UI lives in `src/articles/`, manuscripts in `content/articles/`, and metadata/import registries in `src/articles/generated/`. Only explicitly published bodies are emitted into production. Root AGENTS.md is now a short task entry; its complete former teaching instructions are preserved in `docs/teaching/WORKSPACE-INSTRUCTIONS.md`. This structural change updates no lesson completion state.

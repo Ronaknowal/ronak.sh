@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Home from "../home/Home.jsx";
 import SiteHeader from "../shared/layout/SiteHeader.jsx";
 import { portfolioAnchors } from "../portfolio/navigation.js";
+import { pageTitle } from "./pageMeta.js";
 
 const Portfolio = lazy(() => import("../portfolio/Portfolio.jsx"));
 const ArticlesIndex = lazy(() => import("../articles/ArticlesIndex.jsx"));
@@ -18,7 +19,7 @@ function HomeEntry() {
 }
 
 function MissingPage() {
-  useEffect(() => { document.title = "Page not found · ronak.sh"; }, []);
+  useEffect(() => { document.title = pageTitle("Page not found"); }, []);
   return <><SiteHeader /><main id="site-main" className="site-recovery" tabIndex={-1}><span className="site-eyebrow">404 / Page not found</span><h1>Let’s find your way back.</h1><p>This address doesn’t point to a published page. Start at home to explore the portfolio or learning workspace.</p><Link to="/">Back to home →</Link></main></>;
 }
 

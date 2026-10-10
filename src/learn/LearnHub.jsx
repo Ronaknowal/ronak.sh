@@ -9,6 +9,7 @@ import LearningNav from "./components/LearningNav.jsx";
 import TrackCard from "./components/TrackCard";
 import TopicList from "./components/TopicList";
 import "./learning-workspace.css";
+import { learnViewNames, pageTitle } from "../app/pageMeta.js";
 
 const publishedCount = allTopicsOrdered.filter(topic => topic.status === "published").length;
 const moduleCount = new Set(trackGroups.flatMap(group => group.trackIds)).size;
@@ -264,7 +265,7 @@ export default function LearnHub({ view = "explore" }) {
   const pageHeading = pageHeadings[view];
 
   useEffect(() => {
-    document.title = `${view === "explore" ? "Learn" : view[0].toUpperCase() + view.slice(1)} · ronak.sh`;
+    document.title = view === "explore" ? pageTitle("Learn") : pageTitle(learnViewNames[view] ?? view, "Learn");
     window.scrollTo(0, 0);
   }, [view, requestedGroup]);
 

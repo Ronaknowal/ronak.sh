@@ -6,6 +6,7 @@ import { loadProject } from "./data/projects/loader.js";
 import { topicMap } from "./data/catalogue.js";
 import useProjectProgress from "./hooks/useProjectProgress.js";
 import "./project-reader.css";
+import { pageTitle } from "../app/pageMeta.js";
 
 function ProjectError({ onRetry }) {
   return (
@@ -176,10 +177,10 @@ export default function ProjectReader() {
 
   useEffect(() => {
     document.title = !project
-      ? "Project not found · Learn"
+      ? pageTitle("Project not found", "Learn")
       : !stage
-        ? "Stage not found · Learn"
-        : `${stage.title} · Research projects`;
+        ? pageTitle("Stage not found", project.title)
+        : pageTitle(stage.title, project.title);
     window.scrollTo(0, 0);
   }, [project, stage]);
 

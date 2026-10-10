@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import SiteHeader from "../shared/layout/SiteHeader.jsx";
+import { pageTitle } from "../app/pageMeta.js";
 import "./portfolio.css";
 
 // --- Noise Canvas Component ---
@@ -723,7 +724,7 @@ export default function Portfolio() {
     { title: "Founder Journey: From Idea to MVP", type: "Thread", icon: "◈" },
   ];
 
-  useEffect(() => { document.title = "Portfolio · Ronak Sharma"; }, []);
+  useEffect(() => { document.title = pageTitle("Portfolio"); }, []);
 
   return (
     <div className="portfolio-page"

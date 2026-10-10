@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile, access } from "node:fs/promises";
+import { readFile, access, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readArticles } from "./lib/article-content.mjs";
+import { sitePages } from "./lib/site-build.mjs";
+import { homeTitle } from "../src/app/pageMeta.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const manifest = JSON.parse(await readFile(path.join(root, "dist/.vite/manifest.json"), "utf8"));
@@ -38,8 +40,19 @@ for (const key of Object.keys(manifest).filter(key => key.startsWith("content/ar
 }
 for (const key of allowedBodies) assert.ok(manifest[key], `Missing published body: ${key}`);
 for (const file of ["articles/index.html", "portfolio/index.html", "learn/index.html", "404.html", ".nojekyll", ...published.map(article => `articles/${article.slug}/index.html`)]) await access(path.join(root, "dist", file));
-for (const article of published) {
-  const html = await readFile(path.join(root, "dist/articles", article.slug, "index.html"), "utf8");
-  assert.ok(!html.includes("<title>Ronak Sharma — Build"), "Article entry needs its own metadata");
+// Every page's entry file carries exactly its own title, description and canonical address.
+const escapeHtml = value => value.replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
+const pages = await sitePages(root);
+for (const page of pages) {
+  const html = await readFile(path.join(root, "dist", page.route.slice(1), "index.html"), "utf8");
+  assert.ok(html.includes(`<title>${escapeHtml(page.title)}</title>`), `${page.route}: wrong title`);
+  assert.ok(html.includes(`<meta name="description" content="${escapeHtml(page.summary)}" />`), `${page.route}: wrong description`);
+  assert.ok(html.includes(`<link rel="canonical" href="https://ronak.sh${page.canonical ?? page.route}" />`), `${page.route}: wrong canonical`);
+  assert.ok(page.summary.length <= 161, `${page.route}: description longer than search results show`);
 }
-console.log(`Build checks passed: lazy section boundaries, isolated Markdown reader, ${published.length} on-demand published bodies, no draft chunks, static route entry files and Pages fallback.`);
+const homeHtml = await readFile(path.join(root, "dist/index.html"), "utf8");
+assert.ok(homeHtml.includes(`<title>${escapeHtml(homeTitle)}</title>`), "Home entry has the wrong title");
+// Cloudflare Workers static assets allow 20,000 files per deployment; fail well before that.
+const fileCount = (await readdir(path.join(root, "dist"), { recursive: true, withFileTypes: true })).filter(entry => entry.isFile()).length;
+assert.ok(fileCount < 18000, `dist has ${fileCount} files; Cloudflare's limit is 20,000`);
+console.log(`Build checks passed: lazy section boundaries, isolated Markdown reader, ${published.length} on-demand published bodies, no draft chunks, ${pages.length} page entries with their own title, description and canonical address, ${fileCount} deployed files, and the fallback page.`);

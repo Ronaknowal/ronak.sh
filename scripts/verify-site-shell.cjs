@@ -69,6 +69,7 @@ async function capture(page, name, fullPage = false) {
 
     await open(page, '/', '.home-hero');
     assert.equal(await page.locator('h1').innerText(), 'Ronak Sharma.');
+    assert.equal(await page.title(), 'Ronak Sharma · Data Science Engineer & AI Builder');
     assert.equal(await page.locator('.home-motto .sr-only').innerText(), 'I learn by training it from scratch.');
     const moreLearning = page.getByRole('navigation', { name: 'More ways to learn' });
     assert.deepEqual(await moreLearning.locator('a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/learn/paths', '/learn/projects']);
@@ -184,8 +185,14 @@ async function capture(page, name, fullPage = false) {
       if (name === 'Start this route') {
         await page.locator('.reader-article').last().waitFor();
         assert.match(new URL(page.url()).pathname, /^\/learn\/topic\//);
-      } else if (name === 'Follow a guided path') await page.locator('.workspace-path').first().waitFor();
-      else await page.locator('#projects').waitFor();
+        assert.match(await page.title(), / · Learn · ronak\.sh$/, 'Lesson tab title');
+      } else if (name === 'Follow a guided path') {
+        await page.locator('.workspace-path').first().waitFor();
+        assert.equal(await page.title(), 'Paths · Learn · ronak.sh');
+      } else {
+        await page.locator('#projects').waitFor();
+        assert.equal(await page.title(), 'Portfolio · ronak.sh');
+      }
       await page.getByRole('link', { name: 'ronak.sh — Home', exact: true }).click();
       await page.locator('.home-hero').waitFor();
       assert.equal(await page.evaluate(() => scrollY), 0);

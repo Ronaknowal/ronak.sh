@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { homeTitle } from "../app/pageMeta.js";
 import SiteHeader from "../shared/layout/SiteHeader.jsx";
 import HeroMotto from "./HeroMotto.jsx";
 import LearnSection from "./LearnSection.jsx";
@@ -8,7 +9,7 @@ import "./home.css";
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
 export default function Home() {
-  useEffect(() => { document.title = "Ronak Sharma — Build & understand"; }, []);
+  useEffect(() => { document.title = homeTitle; }, []);
 
   return (
     <div className="site-home">

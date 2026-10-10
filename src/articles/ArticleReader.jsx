@@ -6,6 +6,7 @@ import ArticleLayout from "./ArticleLayout.jsx";
 import { articles } from "./generated/catalogue.js";
 import { articleLoaders } from "./generated/loaders.js";
 import { formatArticleDate } from "./article-format.js";
+import { pageTitle } from "../app/pageMeta.js";
 
 const markdownComponents = {
   a({ node: _node, href, children, ...attributes }) {
@@ -41,6 +42,6 @@ function ArticleBody({ article }) {
 export default function ArticleReader() {
   const { slug } = useParams();
   const article = articles.find(item => item.slug === slug);
-  useEffect(() => { document.title = `${article?.title || "Article not found"} · ronak.sh`; }, [article]);
+  useEffect(() => { document.title = pageTitle(article?.title || "Article not found", "Articles"); }, [article]);
   return <ArticleLayout reader>{article ? <ArticleBody key={slug} article={article} /> : <div className="article-missing"><p className="site-eyebrow">404 / Article not found</p><h1>This article isn’t available.</h1><p>It may not be published, or the address may have changed.</p><Link to="/articles">Browse published articles →</Link></div>}</ArticleLayout>;
 }

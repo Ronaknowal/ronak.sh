@@ -8,6 +8,7 @@ import { getLearningRoute, getTracks, learningPaths, trackGroups } from "./data/
 import useProgress from "./hooks/useProgress";
 import ReaderSidebar from "./components/ReaderSidebar";
 import TopicContent from "./components/TopicContent";
+import { pageTitle } from "../app/pageMeta.js";
 
 const fullTrackIds = trackGroups.flatMap((group) => group.trackIds);
 
@@ -45,7 +46,7 @@ export default function Reader() {
   const currentModule = navigationGroups.find(group => group.id === currentModuleId);
 
   useEffect(() => {
-    if (topic) document.title = `${topic.title} · Learn · ronak.sh`;
+    if (topic) document.title = pageTitle(topic.title, "Learn");
   }, [topic]);
 
   useEffect(() => {
