@@ -47,7 +47,8 @@ for (const page of pages) {
   const html = await readFile(path.join(root, "dist", entryFile(page.route)), "utf8");
   assert.ok(html.includes(`<title>${escapeHtml(page.title)}</title>`), `${page.route}: wrong title`);
   assert.ok(html.includes(`<meta name="description" content="${escapeHtml(page.summary)}" />`), `${page.route}: wrong description`);
-  assert.ok(html.includes(`<link rel="canonical" href="https://ronak.sh${page.canonical ?? page.route}" />`), `${page.route}: wrong canonical`);
+  if (page.route === "/") assert.ok(!html.includes('rel="canonical"'), "The fallback index.html must not claim a canonical address");
+  else assert.ok(html.includes(`<link rel="canonical" href="https://ronak.sh${page.canonical ?? page.route}" />`), `${page.route}: wrong canonical`);
   assert.ok(page.summary.length <= 161, `${page.route}: description longer than search results show`);
 }
 const homeHtml = await readFile(path.join(root, "dist/index.html"), "utf8");

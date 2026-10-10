@@ -8,7 +8,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { createArticle, generateArticles, readArticles } from "./lib/article-content.mjs";
-import { writeSiteEntries } from "./lib/site-build.mjs";
+import { entryFile, writeSiteEntries } from "./lib/site-build.mjs";
 
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
 const fixtureRoot = await mkdtemp(path.join(tmpdir(), "ronak-article-tests-"));
@@ -56,10 +56,10 @@ try {
   await mkdir(outputRoot);
   await writeFile(path.join(outputRoot, "index.html"), '<html><head><title>Original</title><meta name="description" content="Original" /></head><body><div id="root"></div></body></html>');
   await writeSiteEntries(fixtureRoot, outputRoot);
-  const entry = await readFile(path.join(outputRoot, "articles/escaped-metadata/index.html"), "utf8");
-  assert.ok(entry.includes('<title>Prices: $` &lt;model&gt; &amp; &quot;data&quot; · ronak.sh</title>'));
+  const entry = await readFile(path.join(outputRoot, entryFile("/articles/escaped-metadata")), "utf8");
+  assert.ok(entry.includes('<title>Prices: $` &lt;model&gt; &amp; &quot;data&quot; · Articles · ronak.sh</title>'));
   assert.ok(entry.includes('content="Quotes &quot; and &lt;tags&gt; must stay text."'));
-  await assert.rejects(() => readFile(path.join(outputRoot, "articles/private-draft/index.html")), { code: "ENOENT" });
+  await assert.rejects(() => readFile(path.join(outputRoot, entryFile("/articles/private-draft"))), { code: "ENOENT" });
   assert.equal(await readFile(path.join(outputRoot, "404.html"), "utf8"), await readFile(path.join(outputRoot, "index.html"), "utf8"));
   const markup = renderToStaticMarkup(createElement(Markdown, { remarkPlugins: [remarkGfm], skipHtml: true }, "## A heading\n\n[unsafe](javascript:alert%281%29)\n\n<script>window.bad = true;</script>\n\n| A | B |\n| - | - |\n| one | two |\n\n```js\nconst answer = 42;\n```"));
   assert.ok(markup.includes("<table>") && markup.includes("<h2>A heading</h2>") && markup.includes("<pre><code"));

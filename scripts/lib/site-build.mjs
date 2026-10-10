@@ -61,6 +61,9 @@ export async function writeSiteEntries(repositoryRoot, outputRoot) {
     if (seen.has(page.route)) throw new Error(`Duplicate site route: ${page.route}`);
     seen.add(page.route);
     if (!/^\/[a-z0-9\-/]*$/.test(page.route)) throw new Error(`Unsafe site route: ${page.route}`);
+    // index.html is also the host's fallback for unknown addresses, so it stays exactly
+    // as authored (it already carries Home's title and description) and has no canonical.
+    if (page.route === "/") continue;
     const file = path.join(outputRoot, entryFile(page.route));
     await mkdir(path.dirname(file), { recursive: true });
     const content = html.replace(/<title>.*?<\/title>/s, () => `<title>${escapeHtml(page.title)}</title>`)
