@@ -19,7 +19,7 @@ export async function sitePages(repositoryRoot) {
   const articles = await readArticles(repositoryRoot);
   const trackTitles = Object.fromEntries(tracks.map(track => [track.id, track.title]));
   const lesson = (topic, route) => ({
-    route, canonical: `/learn/topic/${topic.id}`, title: pageTitle(topic.title, "Learn"),
+    route, canonical: `/learn/topic/${topic.id}`, title: pageTitle(topic.title, "Learn"), published: topic.status === "published",
     summary: lessonDescription({ title: topic.title, summary: topicCatalogue[topic.id]?.blueprint?.summary, trackTitle: trackTitles[topic.trackId] ?? "the curriculum", section: topic.section }),
   });
   const topicById = Object.fromEntries(allTopicsOrdered.map(topic => [topic.id, topic]));
@@ -47,6 +47,10 @@ export async function sitePages(repositoryRoot) {
   ];
 }
 
+// "/learn/topic/x" is written as "learn/topic/x.html": Cloudflare (and vite preview)
+// serve it at the slash-less address the app links to, with no redirect.
+export const entryFile = route => route === "/" ? "index.html" : `${route.slice(1)}.html`;
+
 // The host serves index.html for unknown addresses. Give every real page its own
 // entry file so search engines and link previews see that page's title and description.
 export async function writeSiteEntries(repositoryRoot, outputRoot) {
@@ -57,13 +61,24 @@ export async function writeSiteEntries(repositoryRoot, outputRoot) {
     if (seen.has(page.route)) throw new Error(`Duplicate site route: ${page.route}`);
     seen.add(page.route);
     if (!/^\/[a-z0-9\-/]*$/.test(page.route)) throw new Error(`Unsafe site route: ${page.route}`);
-    const directory = path.join(outputRoot, page.route.slice(1));
-    await mkdir(directory, { recursive: true });
+    const file = path.join(outputRoot, entryFile(page.route));
+    await mkdir(path.dirname(file), { recursive: true });
     const content = html.replace(/<title>.*?<\/title>/s, () => `<title>${escapeHtml(page.title)}</title>`)
       .replace(/<meta name="description" content="[^"]*"\s*\/>/, () => `<meta name="description" content="${escapeHtml(page.summary)}" />`)
       .replace("</head>", () => `  <link rel="canonical" href="${origin}${page.canonical ?? page.route}" />\n  </head>`);
-    await writeFile(path.join(directory, "index.html"), content);
+    await writeFile(file, content);
   }
   await writeFile(path.join(outputRoot, "404.html"), html);
   await writeFile(path.join(outputRoot, ".nojekyll"), "");
+  await writeFile(path.join(outputRoot, "sitemap.xml"), sitemapXml(pages));
+  await writeFile(path.join(outputRoot, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 }
+
+// Only canonical addresses of real content: duplicate lesson URLs point at their
+// topic URL, and planned (outline-only) lessons join automatically once published.
+export const sitemapUrls = pages => pages
+  .filter(page => (page.canonical ?? page.route) === page.route && page.published !== false)
+  .map(page => origin + page.route);
+
+const sitemapXml = pages => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
+  sitemapUrls(pages).map(url => `  <url><loc>${escapeHtml(url)}</loc></url>`).join("\n")}\n</urlset>\n`;

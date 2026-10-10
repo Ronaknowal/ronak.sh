@@ -69,7 +69,11 @@ At build time, `scripts/lib/site-build.mjs` writes the same title, a description
 
 A lesson reachable from several URLs points its canonical at `/learn/topic/<id>`. Lesson descriptions use the authored blueprint summary, trimmed to whole sentences or a clause. Lessons without a summary get a short factual line.
 
-`npm run check:site-build` verifies every entry and fails if the deployment approaches Cloudflare's 20,000-file limit. Entries are `<route>/index.html`. Cloudflare redirects `/route` to `/route/` and serves it. The local `vite preview` server needs the trailing slash to show the per-page title.
+Entries are written as `<route>.html`, for example `learn/topic/x.html`. Cloudflare and `vite preview` both serve them at the slash-less address the app links to (`/learn/topic/x`) with a 200 and no redirect, so canonical and sitemap URLs never point at a redirect. Don't switch back to `<route>/index.html`: that forces a redirect to a trailing slash.
+
+The build also writes `sitemap.xml` and `robots.txt` (which points to the sitemap) from the same page list. The sitemap holds only canonical content pages: Home, sections, Learn views, modules, paths, project stages, articles and published lessons. Planned, outline-only lessons join automatically once published. Duplicate module and path lesson URLs are left out.
+
+`npm run check:site-build` verifies every entry and the sitemap, and fails if the deployment approaches Cloudflare's 20,000-file limit. Submit `sitemap.xml` once in Google Search Console; Google re-reads it after each deploy.
 
 ## Repository and Articles ownership
 
