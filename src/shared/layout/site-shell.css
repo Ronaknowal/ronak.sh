@@ -13,12 +13,17 @@
 .site-header { position: fixed; inset: 0 0 auto; z-index: 10002; height: var(--site-header-height); display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-inline: clamp(18px, 3.5vw, 56px); background: var(--site-background); border-bottom: 1px solid #202020; color: var(--site-text); font-family: 'Space Grotesk', sans-serif; }
 .site-header a { text-decoration: none; }
 .site-brand { display: flex; align-items: center; flex-shrink: 0; gap: 18px; }
-.site-header .site-logo { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font: 600 13px 'JetBrains Mono', monospace; letter-spacing: .025em; color: var(--site-accent); }
-.site-logo > span { font-family: 'Space Grotesk', sans-serif; font-size: 15px; }
+/* The mark matches the hero name: white, with only the dot in amber. */
+.site-header .site-logo { display: inline-flex; align-items: center; min-height: 44px; font: 600 13px 'JetBrains Mono', monospace; letter-spacing: .025em; color: var(--site-text); transition: color .15s; }
+.site-logo__dot { color: var(--site-accent); transition: color .15s; }
+.site-header .site-logo:hover { color: #fff; }
+.site-logo:hover .site-logo__dot { color: var(--site-accent-hover); }
+/* Internal links carry no arrow. Same rule as Learn and Portfolio navigation:
+   hover turns the text amber; only the current section adds the amber underline. */
 .site-header__links { display: flex; align-items: center; gap: clamp(20px, 4vw, 40px); }
-.site-header__links a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--site-secondary); font-size: 13px; }
-.site-header__links a:hover { color: var(--site-accent-hover); }
-.site-header__links a > span { color: var(--site-muted); }
+.site-header__links a { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: var(--site-secondary); font-size: 13px; transition: color .15s; }
+.site-header__links a:hover, .site-header__links a[aria-current=page] { color: var(--site-accent-hover); }
+.site-header__links a[aria-current=page]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px; background: var(--site-accent); }
 .site-switcher { position: relative; display: flex; align-items: center; gap: 12px; }
 .site-brand__separator { color: #646464; }
 .site-switcher__trigger { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 4px; border: 0; background: none; color: var(--site-secondary); font-size: 13px; cursor: pointer; }
@@ -50,7 +55,7 @@
   .site-brand { gap: 8px; }
   .site-switcher { gap: 5px; }
   .site-switcher__panel { position: fixed; top: var(--site-header-height); left: 14px; width: min(292px, calc(100vw - 28px)); }
-  .site-header--learn .site-logo > span, .site-header--learn .site-brand__separator { display: none; }
+  .site-header--learn .site-brand__separator { display: none; }
   .site-header--learn .site-switcher__trigger { font-size: 12px; gap: 5px; }
   .site-header--learn .workspace-nav__sections { gap: 12px; }
   .site-header--learn .workspace-nav__sections a { font-size: 12px; }
@@ -61,16 +66,14 @@
   .site-header--learn .site-brand { gap: 3px; }
   .site-header--learn .workspace-nav__sections { gap: 10px; }
 }
-@media (prefers-reduced-motion: reduce) { .site-switcher__trigger svg { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .site-switcher__trigger svg, .site-header .site-logo, .site-logo__dot, .site-header__links a { transition: none; } }
 
 /* The home header fits all published destinations without a second row. */
 @media (max-width: 600px) {
   .site-header__links { gap: 18px; }
-  .site-header__links a { gap: 0; font-size: 12px; }
-  .site-header__links a > span { display: none; }
+  .site-header__links a { font-size: 12px; }
 }
 @media (max-width: 370px) {
   .site-header:not(.site-header--learn):not(.site-header--portfolio) { padding-inline: 14px; }
   .site-header__links { gap: 13px; }
-  .site-header .site-logo > span { display: none; }
 }

@@ -38,7 +38,7 @@ export default function SiteHeader({ section = "home", children, skipTarget = "s
       <a className="site-skip" href={`#${skipTarget}`}>Skip to content</a>
       <header className={`site-header ${className}`}>
         <div className="site-brand">
-          <Link to="/" className="site-logo" aria-label="ronak.sh — Home">ronak.sh<span aria-hidden="true">↗</span></Link>
+          <Link to="/" className="site-logo" aria-label="ronak.sh — Home"><span>ronak<span className="site-logo__dot">.</span>sh</span></Link>
           {section !== "home" && (
             <div className="site-switcher" ref={switcherRef}>
               <span className="site-brand__separator" aria-hidden="true">/</span>
@@ -51,7 +51,7 @@ export default function SiteHeader({ section = "home", children, skipTarget = "s
                   <p>Explore ronak.sh</p>
                   {siteSections.map(item => (
                     <Link key={item.id} to={item.href} aria-current={item.id === section ? "true" : undefined} onClick={() => setIsOpen(false)}>
-                      <span>{item.label}<span aria-hidden="true">{item.id === section ? "•" : "↗"}</span></span>
+                      <span>{item.label}<span aria-hidden="true">{item.id === section ? "•" : "→"}</span></span>
                       <small>{item.description}</small>
                     </Link>
                   ))}
@@ -62,7 +62,7 @@ export default function SiteHeader({ section = "home", children, skipTarget = "s
         </div>
         {children || (
           <nav className="site-header__links" aria-label="Primary navigation">
-            {siteSections.filter(item => item.id !== "home").map(item => <Link key={item.id} to={item.href} aria-current={item.id === section ? "page" : undefined}>{item.label}<span aria-hidden="true">↗</span></Link>)}
+            {siteSections.filter(item => item.id !== "home").map(item => <Link key={item.id} to={item.href} aria-current={item.id === section ? "page" : undefined}>{item.label}</Link>)}
           </nav>
         )}
       </header>

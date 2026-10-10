@@ -67,24 +67,67 @@ async function capture(page, name, fullPage = false) {
     const requests = [];
     page.on('request', request => requests.push(new URL(request.url()).pathname));
 
-    await open(page, '/', '.home-destinations');
+    await open(page, '/', '.home-hero');
     assert.equal(await page.locator('h1').innerText(), 'Ronak Sharma.');
-    const shortcuts = page.getByRole('navigation', { name: 'Start learning' });
-    assert.deepEqual(await shortcuts.locator('a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/learn/paths', '/learn/projects', '/learn/catalogue']);
+    assert.equal(await page.locator('.home-motto .sr-only').innerText(), 'I learn by training it from scratch.');
+    const moreLearning = page.getByRole('navigation', { name: 'More ways to learn' });
+    assert.deepEqual(await moreLearning.locator('a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/learn/paths', '/learn/projects']);
     const allowedHome = dependencyFiles('index.html');
+    // Home's compact lesson index is its own on-demand data, prefetched when the browser is idle.
+    allowedHome.add('/' + manifest['src/learn/data/generated/home-index.js'].file);
     assert.deepEqual(requests.filter(file => file.startsWith('/assets/') && /\.(js|css)$/.test(file) && !allowedHome.has(file)), [], 'Home loaded an unrelated section');
     assert.ok(![...allowedHome].some(file => /LearningNav|Portfolio|Reader|catalogue/i.test(file)), 'Home imports section content');
     assert.equal(await page.locator('canvas').count(), 0);
-    assert.equal(await page.locator('.home-destinations .home-destination--articles').getAttribute('href'), '/articles');
+    // The mark is white with an amber dot, and internal header links carry no external-link arrow.
+    const logo = page.getByRole('link', { name: 'ronak.sh — Home', exact: true });
+    assert.equal(await logo.innerText(), 'ronak.sh');
+    assert.deepEqual(await logo.evaluate(element => [getComputedStyle(element).color, getComputedStyle(element.querySelector('.site-logo__dot')).color]), ['rgb(232, 232, 232)', 'rgb(226, 181, 90)']);
+    assert.ok(!(await page.locator('.site-header').innerText()).includes('↗'), 'Internal header links must not use the external-link arrow');
+    assert.equal(await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Articles', exact: false }).getAttribute('href'), '/articles');
     report.homePayload = await page.evaluate(() => performance.getEntriesByType('resource').filter(item => new URL(item.name).origin === location.origin && /\.(js|css)$/.test(new URL(item.name).pathname)).map(item => ({ file: new URL(item.name).pathname, decodedBytes: item.decodedBodySize, encodedBytes: item.encodedBodySize })));
     report.checks.push({ case: 'Home loads only the shared shell and its own presentation; no curriculum, lesson, lab or portfolio body', passed: true });
     await capture(page, 'home-desktop.png', true);
 
+    // Route finder: example route, chips, search and the whole-curriculum index.
+    const route = page.locator('.home-route');
+    assert.equal(await route.locator('h3').innerText(), 'Route to Transformer Block Architecture');
+    assert.equal(await page.getByRole('button', { name: 'transformers', exact: true }).getAttribute('aria-pressed'), 'true');
+    assert.equal(await route.locator('.home-stop').count(), 7, 'Long routes collapse to seven items');
+    await route.getByRole('button', { name: /^\+\d+ stops$/ }).click();
+    assert.ok(await route.locator('.home-stop').count() > 7, 'The collapsed route expands in place');
+    await page.getByRole('button', { name: 'backprop', exact: true }).click();
+    await route.locator('h3', { hasText: 'Backpropagation & Automatic Differentiation' }).waitFor();
+    const search = page.getByRole('combobox', { name: 'Search for a concept' });
+    await search.fill('flash attention impl');
+    await page.getByRole('option').first().waitFor();
+    await search.press('Enter');
+    await route.locator('h3', { hasText: 'Flash Attention Implementation' }).waitFor();
+    assert.equal(await search.getAttribute('aria-expanded'), 'false');
+    const firstStop = await route.locator('.home-route__start').getAttribute('href');
+    assert.match(firstStop, /^\/learn\/topic\/[a-z0-9-]+$/);
+    const whole = page.getByRole('button', { name: /Or open the whole curriculum/ });
+    assert.match(await whole.innerText(), /1,461 lessons · 29 tracks · 6 stages · 254 open now/);
+    await whole.click();
+    await page.getByRole('button', { name: /Deep Learning Fundamentals & Architectures/ }).click();
+    await page.getByRole('button', { name: /^Perceptrons, Neurons & Activation Functions/ }).click();
+    await route.locator('h3', { hasText: 'Perceptrons, Neurons & Activation Functions' }).waitFor();
+    await page.getByRole('searchbox', { name: 'Filter lessons' }).fill('diffusion');
+    const generative = page.getByRole('button', { name: /^Generative Models/ });
+    assert.equal(await generative.getAttribute('aria-expanded'), 'true', 'Filtered tracks start open');
+    await generative.click();
+    assert.equal(await generative.getAttribute('aria-expanded'), 'false', 'A filtered track can still be collapsed');
+    await page.getByRole('searchbox', { name: 'Filter lessons' }).fill('zzzz-no-match');
+    await page.getByText('No lesson matches that yet.').waitFor();
+    const elsewhere = await page.locator('.home-row--external').evaluateAll(links => links.map(link => link.getAttribute('href')));
+    assert.ok(elsewhere.length && elsewhere.every(href => /^https:\/\//.test(href)), 'Elsewhere renders only real external URLs');
+    report.checks.push({ case: 'Home route finder: example route, collapse/expand, chips, keyboard search, curriculum index selection, filter empty state, real external links only', passed: true });
+
+    await open(page, '/', '.home-hero');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').innerText(), 'Skip to content');
     await page.keyboard.press('Enter');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'site-main');
-    await page.locator('.home-destination--portfolio').click();
+    await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Portfolio', exact: false }).click();
     await page.locator('#portfolio-main').waitFor();
     assert.equal(new URL(page.url()).pathname, '/portfolio');
     const portfolioSwitch = page.getByRole('button', { name: 'Browse site, current section: Portfolio' });
@@ -108,13 +151,13 @@ async function capture(page, name, fullPage = false) {
 
     for (const width of [1440, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 900 });
-      for (const [route, selector] of [['/', '.home-destinations'], ['/learn', '.workspace-hero'], ['/learn/paths', '.workspace-path'], ['/portfolio', '#portfolio-main']]) {
+      for (const [route, selector] of [['/', '.home-hero'], ['/learn', '.workspace-hero'], ['/learn/paths', '.workspace-path'], ['/portfolio', '#portfolio-main']]) {
         await open(page, route, selector);
         await layout(page, `${route} at ${width}px`, route !== '/portfolio');
       }
     }
     await page.setViewportSize({ width: 390, height: 844 });
-    await open(page, '/', '.home-destinations');
+    await open(page, '/', '.home-hero');
     await capture(page, 'home-mobile.png', true);
     await open(page, '/learn', '.workspace-hero');
     await learnSwitch.click();
@@ -128,23 +171,23 @@ async function capture(page, name, fullPage = false) {
       const top = await page.locator('#' + anchor).evaluate(element => element.getBoundingClientRect().top);
       assert.ok(top >= 56 && top < 350, `Legacy ${anchor} anchor did not land below the header: ${top}`);
     }
-    await open(page, '/#explore', '.home-destinations');
+    await open(page, '/#work', '.home-hero');
     assert.equal(new URL(page.url()).pathname, '/', 'Home anchor was incorrectly redirected');
     report.checks.push({ case: 'All seven old portfolio anchors redirect and scroll correctly; home anchor stays home', passed: true });
 
     const lessonProgress = JSON.stringify({ 'perceptrons-neurons-activation-functions': true });
     const projectProgress = JSON.stringify({ 'typed-decision-model/define': true });
     await page.evaluate(([lesson, project]) => { localStorage.setItem('kd-progress', lesson); localStorage.setItem('learning-project-progress-v1', project); }, [lessonProgress, projectProgress]);
-    await open(page, '/', '.home-destinations');
-    for (const title of ['Build a typed decision model', 'What makes a neuron learn?', 'Bloospace']) {
-      await page.getByRole('link').filter({ has: page.getByRole('heading', { name: title, exact: true }) }).click();
-      if (title === 'Build a typed decision model') await page.locator('.tdp-stage').waitFor();
-      else if (title === 'What makes a neuron learn?') {
+    await open(page, '/', '.home-hero');
+    for (const name of ['Start this route', 'Follow a guided path', 'SketchToReal']) {
+      await page.getByRole('link', { name, exact: false }).first().click();
+      if (name === 'Start this route') {
         await page.locator('.reader-article').last().waitFor();
-        assert.ok((await page.title()).includes('Perceptrons'));
-      } else await page.locator('#projects').waitFor();
+        assert.match(new URL(page.url()).pathname, /^\/learn\/topic\//);
+      } else if (name === 'Follow a guided path') await page.locator('.workspace-path').first().waitFor();
+      else await page.locator('#projects').waitFor();
       await page.getByRole('link', { name: 'ronak.sh — Home', exact: true }).click();
-      await page.locator('.home-destinations').waitFor();
+      await page.locator('.home-hero').waitFor();
       assert.equal(await page.evaluate(() => scrollY), 0);
     }
     await open(page, '/learn/path/full-curriculum/sequence-to-sequence-encoder-decoder?module=deep-learning-fundamentals', '.reader-header h1');
@@ -155,7 +198,7 @@ async function capture(page, name, fullPage = false) {
     assert.deepEqual(await page.evaluate(() => [localStorage.getItem('kd-progress'), localStorage.getItem('learning-project-progress-v1')]), [lessonProgress, projectProgress]);
     await open(page, '/does-not-exist', '.site-recovery');
     await page.getByRole('link', { name: 'Back to home', exact: false }).click();
-    await page.locator('.home-destinations').waitFor();
+    await page.locator('.home-hero').waitFor();
     report.checks.push({ case: 'All curated links, existing lesson and project deep links, progress conservation, page scroll reset and unknown-address recovery', passed: true });
 
     const failureContext = await browser.newContext();

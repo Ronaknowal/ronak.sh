@@ -7,27 +7,34 @@ const publicRoot = path.resolve(__dirname, '../public');
 
 async function main() {
   const svg = await fs.readFile(path.join(publicRoot, 'favicon.svg'), 'utf8');
+  // iOS masks its own corners, so the touch icon drops the tile's border and corner radius.
+  const touchSvg = svg.replace(/<rect[^>]*\/>/, '');
   const sizes = [16, 32, 48];
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   try {
     const page = await browser.newPage();
-    const images = await page.evaluate(async ({ svg, sizes }) => {
-      const image = new Image();
-      image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-      await image.decode();
+    const images = await page.evaluate(async ({ svg, touchSvg, sizes }) => {
+      const load = async markup => {
+        const image = new Image();
+        image.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(markup);
+        await image.decode();
+        return image;
+      };
+      const tileImage = await load(svg), touchImage = await load(touchSvg);
       return [...sizes, 180].map(size => {
+        const image = size === 180 ? touchImage : tileImage;
         const canvas = document.createElement('canvas');
         canvas.width = canvas.height = size;
         const context = canvas.getContext('2d');
         // iOS supplies its own corner mask; keep the touch icon fully opaque.
         if (size === 180) {
-          context.fillStyle = '#0a0a0a';
+          context.fillStyle = '#0b0b0b';
           context.fillRect(0, 0, size, size);
         }
         context.drawImage(image, 0, 0, size, size);
         return canvas.toDataURL('image/png').split(',')[1];
       });
-    }, { svg, sizes });
+    }, { svg, touchSvg, sizes });
 
     const pngs = images.slice(0, sizes.length).map(image => Buffer.from(image, 'base64'));
     const directory = Buffer.alloc(6 + sizes.length * 16);

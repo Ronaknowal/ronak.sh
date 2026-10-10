@@ -6,6 +6,8 @@ import { topicMap, allTopicsOrdered, allTopicIds, categories } from "../src/lear
 import { tracks } from "../src/learn/data/tracks.js";
 import * as browserNavigation from "../src/learn/data/curriculum.js";
 import * as authoringNavigation from "./lib/authoring-curriculum.mjs";
+import { homeIndex } from "../src/learn/data/generated/home-index.js";
+import { curriculumSummary, exampleRoute } from "../src/learn/data/generated/home-summary.js";
 
 execFileSync(process.execPath, ["scripts/generate-learning-artifacts.mjs", "--check"], { stdio: "inherit" });
 const manifest = JSON.parse(fs.readFileSync("src/learn/data/lesson-manifest.json", "utf8"));
@@ -35,4 +37,13 @@ assert.equal(Object.keys(topicMap).length, allTopicIds.length);
 assert.ok(!fs.existsSync("src/learn/data/topics/index.js"), "Do not restore an eager lesson barrel");
 const imports = fs.readFileSync("src/learn/data/generated/lesson-imports.js", "utf8");
 assert.equal((imports.match(/\(\) => import\(/g) || []).length, Object.keys(manifest).length);
+const knownIds = new Set(allTopicsOrdered.map(topic => topic.id));
+assert.deepEqual(homeIndex.lessons.map(lesson => lesson[0]), allTopicsOrdered.map(topic => topic.id), "Home index keeps every lesson in curriculum order");
+homeIndex.lessons.forEach((lesson, index) => {
+  assert.deepEqual(lesson[4].map(prerequisite => homeIndex.lessons[prerequisite][0]), allTopicsOrdered[index].prerequisiteIds.filter(id => knownIds.has(id)), lesson[0]);
+  assert.equal(lesson[5], allTopicsOrdered[index].status === "published" ? 1 : 0, lesson[0]);
+});
+assert.equal(curriculumSummary.lessons, allTopicsOrdered.length);
+assert.equal(curriculumSummary.open, Object.keys(manifest).length);
+assert.ok(exampleRoute.stops.length > 0, "The Home example route has stops");
 console.log(`PASS: ${allTopicIds.length} topic records, ${tracks.length} modules, ${Object.keys(manifest).length} publication mappings and every guided/module route match authoring sources; body and outline loading remain separate.`);

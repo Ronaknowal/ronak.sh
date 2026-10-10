@@ -20,6 +20,14 @@ for (const entry of [reader, "src/articles/ArticlesIndex.jsx", "src/portfolio/Po
   assert.ok(manifest[entry]?.isDynamicEntry, `${entry} must be a lazy route`);
   assert.ok(!home.has(entry), `Home eagerly imports ${entry}`);
 }
+const homeIndexEntry = "src/learn/data/generated/home-index.js";
+assert.ok(manifest[homeIndexEntry]?.isDynamicEntry, "Home's lesson index must load on demand");
+assert.ok(!home.has(homeIndexEntry), "Home eagerly imports its lesson index");
+for (const entry of home) {
+  const code = await readFile(path.join(root, "dist", manifest[entry].file), "utf8");
+  // Full navigation records carry designStatus; Home's eager code must not.
+  assert.ok(!code.includes("designStatus"), `${entry} eagerly bundles full curriculum navigation`);
+}
 assert.ok(!index.has(reader), "Articles index eagerly imports Markdown reader");
 for (const entry of [...home, ...index]) assert.ok(!entry.startsWith("content/"), `${entry} is eagerly loaded`);
 const published = await readArticles(root);

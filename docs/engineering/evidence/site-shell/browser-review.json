@@ -1,9 +1,13 @@
 {
-  "checkedAt": "2026-09-24T15:36:12.558Z",
-  "base": "http://127.0.0.1:4195",
+  "checkedAt": "2026-10-10T09:42:32.216Z",
+  "base": "http://localhost:4195",
   "checks": [
     {
       "case": "Home loads only the shared shell and its own presentation; no curriculum, lesson, lab or portfolio body",
+      "passed": true
+    },
+    {
+      "case": "Home route finder: example route, collapse/expand, chips, keyboard search, curriculum index selection, filter empty state, real external links only",
       "passed": true
     },
     {
@@ -175,29 +179,34 @@
   "errors": [],
   "homePayload": [
     {
-      "file": "/assets/index-DZzqdX4c.js",
-      "decodedBytes": 246698,
-      "encodedBytes": 78658
+      "file": "/assets/index-BPup06G0.js",
+      "decodedBytes": 262725,
+      "encodedBytes": 83882
     },
     {
-      "file": "/assets/index-BzpxkV_7.css",
-      "decodedBytes": 12512,
-      "encodedBytes": 2996
+      "file": "/assets/index-U8bAE0P6.css",
+      "decodedBytes": 18767,
+      "encodedBytes": 4243
+    },
+    {
+      "file": "/assets/home-index-BgFLbAe0.js",
+      "decodedBytes": 236702,
+      "encodedBytes": 60865
     }
   ],
   "sourceHashes": {
-    "index.html": "e67125f827ea83fee8057c2ecfebbb8b05e52ed18793bf4774494fdeef9d52c0",
+    "index.html": "e010a6c363ee2818a8619db6a09519330aad38661dfb9e4009bd55c24d9734db",
     "src/main.jsx": "f1c0477057045933f9fe9a8192bb59034f125eba2d63e024575ff1d79ec76728",
     "src/index.css": "18449db81bb7eca80cd13a55c7e0374ab719d0d8b91c2194a19aea2af83e21bd",
     "src/portfolio/Portfolio.jsx": "954cfb30cfc2f6ad1c5b17194c86ceccb323cbf979b5b981f4e2caaee47343ad",
-    "src/shared/layout/SiteHeader.jsx": "4a98a57739c64f3d4548a3a5a6021bc3835d1fcd88bdf15f7186ede1c160cbd5",
+    "src/shared/layout/SiteHeader.jsx": "aff84d3b80e0ca3c601596eea60d3b3b324f64ff3c05e4ae892cbb79fb9642f1",
     "src/app/SiteRoutes.jsx": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5",
-    "src/home/Home.jsx": "b1ec286d30b3ac8aade69326ebc6a5ea3584294c3ecbd11c9b9ddf9a23022a03",
+    "src/home/Home.jsx": "23db766e92d5dda6f2baa544798ab84a38307fa3000e907191f73e8b4787a0bf",
     "src/app/navigation.js": "75276a6b68053ca13de5212079a8561b35ff653d84c8a32249a7d53683cd93b0",
-    "src/shared/layout/site-shell.css": "ce1436cc7aa637c282cf7c58e12665a2f3829dca90a242da48b2c4c126af2265",
-    "src/home/home.css": "d5d8f8e4733acfb9106fd683e65411d40e1779142937a85ef3387d11e5339f46",
+    "src/shared/layout/site-shell.css": "6c31ecc1504305dc3152a77e945965b2c1afa4d7b8ee59ad01790008547dd78d",
+    "src/home/home.css": "6b79808bfc79b63b7d22cce51b8c056d3be005c853b4720a043a4525321d2779",
     "src/learn/components/LearningNav.jsx": "9a853faccdf2f58e966d36f2a1a6ab2949cba30595f2ef8db15d649fbbe7da83",
-    "src/learn/learning-base.css": "f0576e46ca19bd904a468b4651b5e8ade51ef8276aa3b35d62277549a1d881d9",
+    "src/learn/learning-base.css": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97",
     "src/learn/Reader.jsx": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
   },
   "passed": true
