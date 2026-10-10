@@ -152,6 +152,14 @@ error. After changing ignore policy, remove only the newly excluded files from t
 Git index (`git rm --cached`), retain their local files, and run the repository check.
 After `git add -A`, `npm run check:repository -- --staged` also verifies that every
 required current file is in the index and no excluded artifact remains tracked.
+The check follows literal JavaScript imports independently of authoring exclusions,
+including transitive dependencies, re-exports and raw imports. Keep runtime data in
+`src/learn/data/` or `public/`; an ignored historical authoring index must not supply
+the website. The recommender download list owns its 21 public entries in
+`src/learn/data/recommender-supporting-files.json`. Validate cleanup changes with a
+build exported from the Git index: a working-tree build can silently use local-only
+files. Import-check regression tests run with
+`node --test scripts/lib/repository-imports.test.mjs`.
 
 The `.gitignore` excludes dependencies, local environments, scoped local authoring history, root build/scratch
 outputs and explicitly named independent-app build outputs. Root-only patterns

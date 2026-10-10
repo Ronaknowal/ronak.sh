@@ -3,6 +3,7 @@ import { readdir } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { collectLocalImports } from './lib/repository-imports.mjs';
 
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
 const excludedDirectories = new Set(["node_modules", "__pycache__", ".venv", "venv", ".git"]);
@@ -59,7 +60,13 @@ for (const entry of await readdir(repositoryRoot, { withFileTypes: true })) {
   if (entry.isFile() && (/\.md$/i.test(entry.name) || ["package.json", "package-lock.json", "vite.config.js", "index.html", ".gitignore", ".gitattributes", "wrangler.jsonc", ".env.example"].includes(entry.name))) required.push(entry.name);
 }
 const futureFiles = ["content/articles/my-article/body.md", "content/articles/my-article/metadata.json", "public/articles/my-article/build.log", "public/learn-assets/example.py", "src/articles/generated/catalogue.js", "docs/archive/scratch/evidence.json", "docs/archive/dist/example.md", "apps/example/src/main.ts", ".env.production.example", "docs/teaching/topic-notes/future-topic.md", "docs/teaching/drafts/future-topic/manuscript.md", "docs/teaching/drafts/future-topic/visual-specifications.json", "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/programmes/solver.py", "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private/src/lesson.jsx", "public/learn-code/example/check-model.py"];
+// An ignored authoring folder can still be a build dependency. Inspect imports
+// independently of the artifact classification so those exclusions cannot hide it.
+const buildEntrypoints = ['vite.config.js', 'scripts/generate-learning-artifacts.mjs', 'scripts/generate-articles.mjs', 'scripts/verify-repository-files.mjs', 'scripts/verify-articles.mjs', 'scripts/verify-site-build.mjs'];
+const dependencies = await collectLocalImports(repositoryRoot, ['src/main.jsx', ...buildEntrypoints]);
+required.push(...dependencies.filter(file => !required.includes(file)));
 assert.deepEqual(ignored([...required, ...futureFiles]), [], "Required source, documentation or public assets are ignored by repository rules");
+console.log(`Local import coverage passed for ${dependencies.length} dependencies.`);
 const disposable = ["node_modules/example/index.js", "dist/index.html", "scratch/report.json", "scratch_local.py", "apps/example/dist/index.html", ".env", ".env.production", "apps/example/.env.local", "public/learn-assets/__pycache__/example.cpython-312.pyc", "docs/teaching/example/content-frozen-r1/src/topic.jsx", "docs/teaching/example/optional-faiss-packages/faiss/index.py", "docs/teaching/example/review/check-initial-schema-failure.py", "docs/teaching/example/runtime-preview/assets/main.js", ...localArtifacts];
 assert.deepEqual(new Set(ignored(disposable)), new Set(disposable), "Caches, builds or secrets are no longer ignored");
 async function verifyPublicDirectory(directory) {

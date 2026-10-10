@@ -1,0 +1,90 @@
+{
+  "commonDataAndReportFiles": [
+    {
+      "filename": "retail-manifest.json",
+      "role": "Attributed data manifest"
+    },
+    {
+      "filename": "retail-train.csv",
+      "role": "train complete calendar occurrence data"
+    },
+    {
+      "filename": "retail-validation.csv",
+      "role": "validation complete calendar occurrence data"
+    },
+    {
+      "filename": "retail-test.csv",
+      "role": "test complete calendar occurrence data"
+    },
+    {
+      "filename": "study-results.json",
+      "role": "Complete measured report"
+    },
+    {
+      "filename": "selection-lock-before-prefix-and-test.json",
+      "role": "Prospective validation choice lock"
+    },
+    {
+      "filename": "prediction-lock-before-test-truth.json",
+      "role": "Prospective prefix prediction lock"
+    },
+    {
+      "filename": "ordered-ids.json",
+      "role": "Ordered local IDs and lexical tie ranks"
+    }
+  ],
+  "typedSavedArrayFiles": [
+    {
+      "filename": "initial-training-inputs.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "locked-prefix-state.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "ordinary-prefix-state.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "prefix-inputs-before-refit.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "sampled-candidate-diagnostic.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "test-truth-after-lock.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-als-r4-l0.1.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-als-r4-l1.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-als-r8-l0.1.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-als-r8-l1.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-item-cosine.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-popularity.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    },
+    {
+      "filename": "validation-truth.npz",
+      "role": "Typed complete saved scientific arrays, no refit"
+    }
+  ]
+}
