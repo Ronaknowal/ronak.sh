@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { easeOut, noiseGlyph, resolveThreshold } from "./noise.js";
-import { useReducedMotion } from "./useReducedMotion.js";
+import { easeOut, noiseGlyph, resolveThreshold } from "../shared/noise.js";
+import { useReducedMotion } from "../shared/useReducedMotion.js";
 
 // Only "training it" resolves. Noise is drawn over each real letter, so the layout never moves.
 function ResolvingPhrase({ text }) {

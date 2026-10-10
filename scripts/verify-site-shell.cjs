@@ -169,8 +169,14 @@ async function capture(page, name, fullPage = false) {
       await open(page, '/#' + anchor, '#' + anchor);
       assert.equal(new URL(page.url()).pathname, '/portfolio');
       assert.equal(new URL(page.url()).hash, '#' + anchor);
-      const top = await page.locator('#' + anchor).evaluate(element => element.getBoundingClientRect().top);
-      assert.ok(top >= 56 && top < 350, `Legacy ${anchor} anchor did not land below the header: ${top}`);
+      // Lands below the header and near the top, unless the page is already scrolled to its end
+      // (a short final section can't be scrolled any higher; it must still be in view).
+      const { top, atEnd, viewport } = await page.locator('#' + anchor).evaluate(element => ({
+        top: element.getBoundingClientRect().top,
+        atEnd: scrollY + innerHeight >= document.documentElement.scrollHeight - 16,
+        viewport: innerHeight,
+      }));
+      assert.ok(top >= 56 && (top < 350 || (atEnd && top < viewport - 100)), `Legacy ${anchor} anchor did not land below the header: ${top}`);
     }
     await open(page, '/#work', '.home-hero');
     assert.equal(new URL(page.url()).pathname, '/', 'Home anchor was incorrectly redirected');

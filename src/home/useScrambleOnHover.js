@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { noiseGlyph } from "./noise.js";
-import { useReducedMotion } from "./useReducedMotion.js";
+import { noiseGlyph } from "../shared/noise.js";
+import { useReducedMotion } from "../shared/useReducedMotion.js";
 
 // A short echo of the hero: a name briefly re-resolves from noise on hover.
 export function useScrambleOnHover(text, duration = 320) {

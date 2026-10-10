@@ -7,6 +7,17 @@ It is not the teaching standard or a mandate to apply portfolio layouts to Learn
 
 > A complete reference for the design philosophy, visual language, code architecture, and decision rationale behind the AI-themed portfolio website. Use this document when extending, refactoring, or redesigning the site.
 
+## Current rules (10 October 2026), overriding the sections below
+
+The user kept the training-loop theme and its scroll experience, but made it honest. Where this list conflicts with older text below (fake metrics in sections 2 and 4.6, green accents in sections 2 and 3), this list wins.
+
+- **No invented numbers.** Project cards show a real run log (`run_started`, `status`, and links when they exist), not loss or accuracy. The concept → prototype → shipped track is read-only and shows the project's real `stage`. Journey tooltips show the year and milestone. Curve heights only shape the metaphor and are never printed. Experience shows real dates. The ongoing role's duration is computed live; finished roles state theirs (`duration`).
+- **No dead links.** Contact links, project links and Outputs render only with a real URL. When no output has one, the Outputs section collapses to a 1 px `#outputs` anchor so old links still land.
+- **Contact works.** `InferencePrompt.jsx` opens the visitor's email app via `contactMailto()` once `CONTACT_EMAIL` has both parts. Until then it shows the LinkedIn route. The form was tested end to end with a placeholder address.
+- **Name first.** The hero reads "RONAK SHARMA" and "Data Science Engineer · AI Builder". It resolves on load, dissolves as you scroll past, and re-forms on return. Section headings resolve once when reached (`ResolvingText.jsx`, using the shared `src/shared/noise.js`). Noise is drawn over real letters, so text never reflows. Reduced motion shows clean text.
+- **Colour by meaning.** Amber marks progress and "active" (the HUD curve, journey curve, Training dot, checkmarks). Chips are neutral grey. Code-style values use the lessons' muted amber `#c9aa70`. The Architecture layers keep blue, purple and pink, which lessons also use to tell concepts apart. The previous green is gone.
+- **Kept as personality:** epoch labels, the HUD's scroll-driven epoch and loss, and the jokes in `model.summary()` and the footer. These are clearly playful, not claims.
+
 ---
 
 ## 1. Core Concept

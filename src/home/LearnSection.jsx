@@ -7,7 +7,7 @@ import RouteSearch from "./RouteSearch.jsx";
 import { ID, planRoute, toRouteView } from "./route.js";
 import { suggestions } from "./suggestions.js";
 import { useHomeIndex } from "./useHomeIndex.js";
-import { useReducedMotion } from "./useReducedMotion.js";
+import { useReducedMotion } from "../shared/useReducedMotion.js";
 
 export default function LearnSection() {
   const homeIndex = useHomeIndex();

@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import SiteHeader from "../shared/layout/SiteHeader.jsx";
 import { pageTitle } from "../app/pageMeta.js";
 import "./portfolio.css";
+import InferencePrompt from "./InferencePrompt.jsx";
+import { ResolvingText, SectionTitle, useResolve } from "./ResolvingText.jsx";
+import { useReducedMotion } from "../shared/useReducedMotion.js";
 
 // --- Noise Canvas Component ---
 const NoiseCanvas = ({ opacity }) => {
@@ -77,9 +80,9 @@ const MiniLossCurve = ({ progress }) => {
 
   return (
     <div
+      className="portfolio-hud"
       style={{
         position: "fixed",
-        top: 70,
         right: 20,
         zIndex: 10000,
         background: "rgba(0,0,0,0.85)",
@@ -98,7 +101,7 @@ const MiniLossCurve = ({ progress }) => {
         </span>
         <span>
           loss{" "}
-          <span style={{ color: "#4ade80" }}>{currentLoss.toFixed(4)}</span>
+          <span style={{ color: "#c9aa70" }}>{currentLoss.toFixed(4)}</span>
         </span>
       </div>
       <svg width={w} height={h} style={{ display: "block" }}>
@@ -115,7 +118,7 @@ const MiniLossCurve = ({ progress }) => {
           <polyline
             points={points.join(" ")}
             fill="none"
-            stroke="#4ade80"
+            stroke="#e2b55a"
             strokeWidth={1.5}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -124,33 +127,6 @@ const MiniLossCurve = ({ progress }) => {
       </svg>
     </div>
   );
-};
-
-// --- Denoising Text ---
-const DenoisingText = ({ text, progress, as: Tag = "span", style = {} }) => {
-  const [displayed, setDisplayed] = useState(text);
-  const chars = "█▓▒░╬╫╪┼╳※¤◊◈⬡⬢⎔⏣";
-
-  useEffect(() => {
-    if (progress >= 1) {
-      setDisplayed(text);
-      return;
-    }
-    const arr = text.split("").map((ch, i) => {
-      if (ch === " ") return " ";
-      const threshold = i / text.length;
-      if (progress > threshold + 0.3) return ch;
-      if (progress > threshold) {
-        return Math.random() > 0.5
-          ? ch
-          : chars[Math.floor(Math.random() * chars.length)];
-      }
-      return chars[Math.floor(Math.random() * chars.length)];
-    });
-    setDisplayed(arr.join(""));
-  }, [text, progress]);
-
-  return <Tag style={style}>{displayed}</Tag>;
 };
 
 // --- Scroll-triggered section ---
@@ -185,10 +161,22 @@ const Section = ({ children, id, style = {} }) => {
   );
 };
 
+// Live duration for an ongoing role, counting months inclusively as LinkedIn does.
+// Finished roles state their duration explicitly (`duration`), matching the CV.
+const durationLabel = (start, end) => {
+  const [startYear, startMonth] = start.split("-").map(Number);
+  const now = new Date();
+  const [endYear, endMonth] = end ? end.split("-").map(Number) : [now.getFullYear(), now.getMonth() + 1];
+  const months = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+  const years = Math.floor(months / 12), rest = months % 12;
+  return [years && `${years} yr`, rest && `${rest} mo`].filter(Boolean).join(" ");
+};
+
 // --- Project Card ---
 const ProjectCard = ({ project, index }) => {
   const [hovered, setHovered] = useState(false);
-  const [step, setStep] = useState(project.defaultStep || 0);
+  // The real status of the project; shown, not adjustable.
+  const step = project.stage;
   const stages = ["concept", "prototype", "shipped"];
 
   return (
@@ -278,12 +266,12 @@ const ProjectCard = ({ project, index }) => {
         {project.description}
       </p>
 
-      {/* Training metrics */}
+      {/* Run log: real facts only */}
       <div
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10,
-          color: "#444",
+          color: "#555",
           padding: "10px 12px",
           background: "rgba(0,0,0,0.3)",
           borderRadius: 4,
@@ -292,71 +280,69 @@ const ProjectCard = ({ project, index }) => {
         }}
       >
         <span>
-          loss: <span style={{ color: "#4ade80" }}>{project.metrics.loss}</span>
+          run_started: <span style={{ color: "#e2b55a" }}>{project.year}</span>
         </span>
         {"  |  "}
         <span>
-          acc: <span style={{ color: "#4ade80" }}>{project.metrics.acc}</span>
+          status: <span style={{ color: "#c9aa70" }}>{stages[step]}</span>
         </span>
-        {"  |  "}
-        <span>
-          epochs:{" "}
-          <span style={{ color: "#e2b55a" }}>{project.metrics.epochs}</span>
-        </span>
-        <br />
-        <span>
-          lr: <span style={{ color: "#888" }}>{project.metrics.lr}</span>
-        </span>
-        {"  |  "}
-        <span>
-          batch_size:{" "}
-          <span style={{ color: "#888" }}>{project.metrics.batch}</span>
-        </span>
+        {project.links?.length > 0 && (
+          <>
+            <br />
+            {project.links.map((link, i) => (
+              <span key={link.href}>
+                {i > 0 && "  |  "}
+                <a href={link.href} target="_blank" rel="noopener noreferrer" style={{ color: "#e2b55a" }}>
+                  {link.label} ↗<span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </span>
+            ))}
+          </>
+        )}
       </div>
 
-      {/* Generation steps slider */}
-      <div>
+      {/* Status track: concept → prototype → shipped */}
+      <div role="img" aria-label={`Status: ${stages[step]}`}>
+        <div
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 9,
+            color: "#555",
+            textTransform: "uppercase",
+            letterSpacing: 1,
+            marginBottom: 10,
+          }}
+        >
+          status
+        </div>
+        <div style={{ position: "relative", height: 2, background: "#2a2a2a", borderRadius: 2, margin: "0 6px" }}>
+          <div style={{ width: `${step * 50}%`, height: "100%", background: "#e2b55a", borderRadius: 2 }} />
+          <div
+            style={{
+              position: "absolute",
+              left: `${step * 50}%`,
+              top: "50%",
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: "#e2b55a",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        </div>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
-            marginBottom: 6,
+            marginTop: 10,
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 9,
           }}
         >
-          <span
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 9,
-              color: "#555",
-              textTransform: "uppercase",
-              letterSpacing: 1,
-            }}
-          >
-            generation step
-          </span>
-          <span
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 9,
-              color: "#e2b55a",
-            }}
-          >
-            {stages[step]}
-          </span>
+          {stages.map((stage, k) => (
+            <span key={stage} style={{ color: k === step ? "#e2b55a" : "#444" }}>{stage}</span>
+          ))}
         </div>
-        <input
-          type="range"
-          min={0}
-          max={2}
-          value={step}
-          onChange={(e) => setStep(parseInt(e.target.value))}
-          style={{
-            width: "100%",
-            accentColor: "#e2b55a",
-            height: 2,
-            cursor: "pointer",
-          }}
-        />
       </div>
 
       {/* Tags */}
@@ -391,17 +377,22 @@ const LossCurve = () => {
   const h = 280;
   const padding = { top: 30, right: 30, bottom: 40, left: 50 };
 
+  // Every point is a real milestone. `loss` only shapes the curve (the metaphor);
+  // it is never shown as a number.
   const events = [
     { t: 0.0, label: "Started learning to code", loss: 0.95, year: "2018" },
-    { t: 0.14, label: "Began CS degree at VIT Bhopal", loss: 0.80, year: "2020" },
-    { t: 0.28, label: "Deep dive into Python & ML", loss: 0.62, year: "2021" },
-    { t: 0.38, label: "First ML projects — exploring AI & CV", loss: 0.50, year: "2022" },
-    { t: 0.48, label: "ML Intern at Learn and Empower", loss: 0.38, year: "2023" },
-    { t: 0.56, label: "Loss spike — navigating job market", loss: 0.48, year: "2023" },
-    { t: 0.66, label: "Trainee at KPIT — systems programming", loss: 0.30, year: "2024" },
-    { t: 0.78, label: "Joined 314e as Data Science Engineer", loss: 0.15, year: "2024" },
-    { t: 0.90, label: "Building AI models in production", loss: 0.08, year: "2025" },
-    { t: 1.0, label: "Currently training...", loss: 0.04, year: "2025" },
+    { t: 0.12, label: "Began CS degree at VIT Bhopal", loss: 0.80, year: "2020" },
+    { t: 0.22, label: "Deep dive into Python & ML", loss: 0.64, year: "2021" },
+    { t: 0.31, label: "First ML projects — exploring AI & CV", loss: 0.52, year: "2022" },
+    { t: 0.40, label: "ML Intern at Learn and Empower", loss: 0.40, year: "2023" },
+    { t: 0.47, label: "Loss spike — navigating job market", loss: 0.49, year: "2023" },
+    { t: 0.55, label: "Trainee at KPIT — systems programming", loss: 0.33, year: "2024" },
+    { t: 0.63, label: "Joined 314e as Data Science Engineer", loss: 0.20, year: "2024" },
+    { t: 0.72, label: "Building AI models in production", loss: 0.13, year: "2025" },
+    { t: 0.80, label: "Built The Simulation Space & AI Content Pipeline", loss: 0.09, year: "2025" },
+    { t: 0.88, label: "Building Bloospace & SketchToReal", loss: 0.06, year: "2026" },
+    { t: 0.95, label: "Publishing the ronak.sh Learn curriculum", loss: 0.045, year: "2026" },
+    { t: 1.0, label: "Currently training...", loss: 0.035, year: "2026" },
   ];
 
   const getX = (t) => padding.left + t * (w - padding.left - padding.right);
@@ -459,7 +450,7 @@ const LossCurve = () => {
           fontFamily="'JetBrains Mono', monospace"
           textAnchor="end"
         >
-          1.0
+          high
         </text>
         <text
           x={padding.left - 10}
@@ -469,7 +460,7 @@ const LossCurve = () => {
           fontFamily="'JetBrains Mono', monospace"
           textAnchor="end"
         >
-          0.0
+          low
         </text>
         <text
           x={w / 2}
@@ -497,7 +488,7 @@ const LossCurve = () => {
         <path
           d={curvePath}
           fill="none"
-          stroke="#4ade80"
+          stroke="#e2b55a"
           strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -507,7 +498,7 @@ const LossCurve = () => {
         <path
           d={curvePath}
           fill="none"
-          stroke="#4ade80"
+          stroke="#e2b55a"
           strokeWidth={6}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -515,55 +506,51 @@ const LossCurve = () => {
         />
 
         {/* Points */}
-        {events.map((e, i) => (
-          <g key={i}>
-            <circle
-              cx={getX(e.t)}
-              cy={getY(e.loss)}
-              r={hoveredPoint === i ? 6 : 4}
-              fill={hoveredPoint === i ? "#e2b55a" : "#4ade80"}
-              stroke={hoveredPoint === i ? "#e2b55a" : "none"}
-              strokeWidth={2}
-              style={{ cursor: "pointer", transition: "all 0.2s ease" }}
-              onMouseEnter={() => setHoveredPoint(i)}
-              onMouseLeave={() => setHoveredPoint(null)}
-            />
-            {hoveredPoint === i && (
-              <g>
-                <rect
-                  x={getX(e.t) - 110}
-                  y={getY(e.loss) - 46}
-                  width={220}
-                  height={36}
-                  rx={4}
-                  fill="rgba(0,0,0,0.9)"
-                  stroke="#e2b55a33"
-                  strokeWidth={1}
-                />
-                <text
-                  x={getX(e.t)}
-                  y={getY(e.loss) - 30}
-                  fill="#e2b55a"
-                  fontSize={9}
-                  fontFamily="'JetBrains Mono', monospace"
-                  textAnchor="middle"
-                >
-                  [{e.year}] {e.label}
-                </text>
-                <text
-                  x={getX(e.t)}
-                  y={getY(e.loss) - 18}
-                  fill="#4ade80"
-                  fontSize={8}
-                  fontFamily="'JetBrains Mono', monospace"
-                  textAnchor="middle"
-                >
-                  loss: {e.loss.toFixed(2)}
-                </text>
-              </g>
-            )}
-          </g>
-        ))}
+        {events.map((e, i) => {
+          const label = `[${e.year}] ${e.label}`;
+          const boxWidth = label.length * 5.6 + 24;
+          // Keep the tooltip inside the chart near either edge.
+          const boxX = Math.min(Math.max(getX(e.t) - boxWidth / 2, 4), w - boxWidth - 4);
+          return (
+            <g key={i}>
+              <circle
+                cx={getX(e.t)}
+                cy={getY(e.loss)}
+                r={hoveredPoint === i ? 6 : 4}
+                fill={hoveredPoint === i ? "#f1cb7d" : "#050505"}
+                stroke="#e2b55a"
+                strokeWidth={2}
+                style={{ cursor: "pointer", transition: "all 0.2s ease" }}
+                onMouseEnter={() => setHoveredPoint(i)}
+                onMouseLeave={() => setHoveredPoint(null)}
+              />
+              {hoveredPoint === i && (
+                <g>
+                  <rect
+                    x={boxX}
+                    y={getY(e.loss) - 38}
+                    width={boxWidth}
+                    height={24}
+                    rx={4}
+                    fill="rgba(0,0,0,0.9)"
+                    stroke="#e2b55a33"
+                    strokeWidth={1}
+                  />
+                  <text
+                    x={boxX + boxWidth / 2}
+                    y={getY(e.loss) - 22}
+                    fill="#e2b55a"
+                    fontSize={9}
+                    fontFamily="'JetBrains Mono', monospace"
+                    textAnchor="middle"
+                  >
+                    {label}
+                  </text>
+                </g>
+              )}
+            </g>
+          );
+        })}
       </svg>
     </div>
   );
@@ -573,7 +560,7 @@ const LossCurve = () => {
 const ArchitectureDiagram = () => {
   const layers = [
     { name: "Input", neurons: ["Curiosity", "Drive", "Vision"], color: "#e2b55a" },
-    { name: "Conv2d", neurons: ["Python", "C++", "JavaScript"], color: "#4ade80" },
+    { name: "Conv2d", neurons: ["Python", "C++", "JavaScript"], color: "#d4d4d4" },
     { name: "Dense", neurons: ["ML", "Deep Learning", "NLP"], color: "#60a5fa" },
     { name: "Dense", neurons: ["Data Science", "CV", "Systems"], color: "#c084fc" },
     { name: "Output", neurons: ["AI Engineer"], color: "#f472b6" },
@@ -645,7 +632,13 @@ const ArchitectureDiagram = () => {
 // --- MAIN APP ---
 export default function Portfolio() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [heroDenoised, setHeroDenoised] = useState(0);
+  // The hero resolves on load (so the first view is always readable), then
+  // dissolves back into noise as you scroll past it; scrolling up re-forms it.
+  const [heroExit, setHeroExit] = useState(0);
+  const reduced = useReducedMotion();
+  const nameClarity = useResolve(true, { duration: 1300, delay: 200 });
+  const roleClarity = useResolve(true, { duration: 1100, delay: 650 });
+  const heroClarity = clarity => reduced ? 1 : Math.min(clarity, 1 - heroExit);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -653,8 +646,8 @@ export default function Portfolio() {
         document.documentElement.scrollHeight - window.innerHeight;
       const progress = Math.min(window.scrollY / total, 1);
       setScrollProgress(progress);
-      const heroP = Math.min(window.scrollY / (window.innerHeight * 0.25), 1);
-      setHeroDenoised(heroP);
+      const vh = window.innerHeight;
+      setHeroExit(Math.min(Math.max((window.scrollY - vh * 0.15) / (vh * 0.55), 0), 1));
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -669,8 +662,7 @@ export default function Portfolio() {
         "AI-powered mobile app that extracts and organizes actionable content from social media videos. Entity-first architecture identifies items, places, products, recipes, and people. Vibecoded.",
       year: "2026",
       tags: ["AI/ML", "Mobile", "Gemini", "Claude", "Supabase"],
-      metrics: { loss: "0.034", acc: "97.2%", epochs: "847", lr: "0.001", batch: "life" },
-      defaultStep: 1,
+      stage: 1,
     },
     {
       name: "Autonomous Driving RL",
@@ -678,7 +670,7 @@ export default function Portfolio() {
         "Reinforcement learning simulation for autonomous driving using Deep Q-Networks. Trained agents to navigate complex traffic scenarios with reward shaping.",
       year: "2021",
       tags: ["PyTorch", "DQN", "Simulation", "Python"],
-      metrics: { loss: "0.112", acc: "89.4%", epochs: "2400", lr: "0.0003", batch: "256" },
+      stage: 0,
     },
     {
       name: "Real-time Sign Language Detection",
@@ -686,7 +678,7 @@ export default function Portfolio() {
         "Explored AI models for real-time sign language detection and translation from video streams. Investigated multiple CV approaches for hand gesture recognition.",
       year: "2024",
       tags: ["Computer Vision", "Video Processing", "TensorFlow"],
-      metrics: { loss: "0.067", acc: "94.1%", epochs: "560", lr: "0.0005", batch: "64" },
+      stage: 0,
     },
     {
       name: "AI Content Pipeline",
@@ -694,8 +686,7 @@ export default function Portfolio() {
         "End-to-end content creation system leveraging AI for research, scriptwriting, and visual generation. Built for Instagram Reels and YouTube shorts about tech and AI.",
       year: "2025",
       tags: ["Content", "AI Generation", "FFmpeg", "Automation"],
-      metrics: { loss: "0.021", acc: "98.6%", epochs: "365", lr: "0.002", batch: "daily" },
-      defaultStep: 1,
+      stage: 1,
     },
     {
       name: "The Simulation Space",
@@ -703,8 +694,7 @@ export default function Portfolio() {
         "Browser-based geospatial intelligence platform combining a 3D interactive globe with real-time data from 50+ sources, a multi-panel intelligence dashboard, an AI-powered research terminal, and a multi-agent simulation engine for geopolitical scenario modeling. 56 toggleable data layers monitoring maritime, aviation, satellites, weather, seismic, and infrastructure. Vibecoded.",
       year: "2025",
       tags: ["Next.js", "CesiumJS", "deck.gl", "Gemini", "CAMEL-AI", "TypeScript"],
-      metrics: { loss: "0.018", acc: "99.1%", epochs: "1200", lr: "0.0001", batch: "realtime" },
-      defaultStep: 1,
+      stage: 1,
     },
     {
       name: "SketchToReal",
@@ -712,17 +702,17 @@ export default function Portfolio() {
         "Real-time generative canvas where users draw sketches on one side of a split-view while AI instantly transforms them into photorealistic images on the other — updating live with under 500ms latency. Powered by few-step diffusion models (SDXL Turbo / FLUX.1 Schnell) conditioned via ControlNet, optimized through StreamDiffusion for 30+ FPS on a single GPU, with optional one-click sketch-to-3D mesh generation via Stable Fast 3D. All open-source, served over WebSockets.",
       year: "2026",
       tags: ["Diffusion Models", "ControlNet", "StreamDiffusion", "WebSockets", "3D"],
-      metrics: { loss: "—", acc: "—", epochs: "0", lr: "TBD", batch: "stream" },
-      defaultStep: 0,
+      stage: 0,
     },
   ];
 
+  // An output is listed only once it has a real URL. Never use "#" or a guessed address.
   const outputs = [
-    { title: "Anthropic's 2025 Financial Deep Dive", type: "Instagram Reel", icon: "◈" },
-    { title: "Building Bloospace in Public", type: "YouTube Series", icon: "◈" },
-    { title: "AI Model Architectures Explained", type: "Blog Post", icon: "◈" },
-    { title: "Founder Journey: From Idea to MVP", type: "Thread", icon: "◈" },
-  ];
+    { title: "Anthropic's 2025 Financial Deep Dive", type: "Instagram Reel", icon: "◈", href: null },
+    { title: "Building Bloospace in Public", type: "YouTube Series", icon: "◈", href: null },
+    { title: "AI Model Architectures Explained", type: "Blog Post", icon: "◈", href: null },
+    { title: "Founder Journey: From Idea to MVP", type: "Thread", icon: "◈", href: null },
+  ].filter(output => output.href);
 
   useEffect(() => { document.title = pageTitle("Portfolio"); }, []);
 
@@ -773,13 +763,13 @@ export default function Portfolio() {
           EPOCH 0 — INITIALIZING WEIGHTS
         </div>
 
-        <DenoisingText
-          text="RONAK"
-          progress={heroDenoised}
+        <ResolvingText
+          text="RONAK SHARMA"
+          clarity={heroClarity(nameClarity)}
           as="h1"
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "clamp(48px, 10vw, 120px)",
+            fontSize: "clamp(44px, 9vw, 112px)",
             fontWeight: 700,
             letterSpacing: "-0.04em",
             margin: 0,
@@ -788,18 +778,30 @@ export default function Portfolio() {
           }}
         />
 
-        <DenoisingText
-          text="AI Builder. Currently training."
-          progress={Math.max(heroDenoised - 0.2, 0) * 1.25}
+        <ResolvingText
+          text={"Data Science Engineer · AI Builder"}
+          clarity={heroClarity(roleClarity)}
           as="p"
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 15,
-            color: "#666",
-            marginTop: 20,
+            color: "#b0b0b0",
+            marginTop: 22,
             letterSpacing: 1,
           }}
         />
+        <p
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 12,
+            color: "#555",
+            marginTop: 10,
+            letterSpacing: 1,
+            opacity: reduced ? 1 : 1 - heroExit,
+          }}
+        >
+          Currently training.
+        </p>
 
         <div
           style={{
@@ -853,7 +855,7 @@ export default function Portfolio() {
           EPOCH 12 — EARLY CONVERGENCE
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -864,7 +866,7 @@ export default function Portfolio() {
           }}
         >
           About
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -908,7 +910,7 @@ export default function Portfolio() {
           <span style={{ color: "#e2b55a" }}>education:</span> VIT Bhopal (CSE, 2024)
           <br />
           <span style={{ color: "#e2b55a" }}>status:</span>{" "}
-          <span style={{ color: "#4ade80" }}>currently_training</span>
+          <span style={{ color: "#c9aa70" }}>currently_training</span>
           <br />
           <span style={{ color: "#e2b55a" }}>learning_rate:</span> 0.001 (but adaptive)
         </div>
@@ -935,7 +937,7 @@ export default function Portfolio() {
           EPOCH 24 — PRE-TRAINING
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -946,7 +948,7 @@ export default function Portfolio() {
           }}
         >
           Pre-training
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -974,7 +976,8 @@ export default function Portfolio() {
                 "Building model evaluation frameworks and performance benchmarking tools",
               ],
               capabilities: ["Data Science", "AI/ML", "Model Evaluation", "Production ML", "NLP"],
-              metrics: { dataset: "enterprise-scale", compute: "cloud-GPU", duration: "1+ year" },
+              start: "2024-07",
+              end: null,
             },
             {
               company: "KPIT Technologies",
@@ -988,7 +991,9 @@ export default function Portfolio() {
                 "Applied systems programming concepts in automotive technology context",
               ],
               capabilities: ["C", "Modern C++", "Design Patterns", "Systems Programming"],
-              metrics: { dataset: "automotive", compute: "embedded", duration: "6 months" },
+              start: "2024-01",
+              end: "2024-07",
+              duration: "6 mo",
             },
             {
               company: "Learn and Empower Pvt Ltd",
@@ -1002,7 +1007,9 @@ export default function Portfolio() {
                 "Worked on data preprocessing pipelines and feature engineering",
               ],
               capabilities: ["Machine Learning", "Deep Learning", "NLP", "Model Integration"],
-              metrics: { dataset: "varied", compute: "single-GPU", duration: "6 months" },
+              start: "2023-11",
+              end: "2024-04",
+              duration: "6 mo",
             },
           ].map((job, i) => (
             <div
@@ -1036,8 +1043,8 @@ export default function Portfolio() {
                       width: 6,
                       height: 6,
                       borderRadius: "50%",
-                      background: "#4ade80",
-                      boxShadow: "0 0 8px #4ade8066",
+                      background: "#e2b55a",
+                      boxShadow: "0 0 8px #e2b55a66",
                       animation: "pulse-dot 2s infinite",
                     }}
                   />
@@ -1045,7 +1052,7 @@ export default function Portfolio() {
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
                       fontSize: 9,
-                      color: "#4ade80",
+                      color: "#e2b55a",
                       letterSpacing: 1,
                       textTransform: "uppercase",
                     }}
@@ -1127,7 +1134,7 @@ export default function Portfolio() {
                 </div>
                 {job.objectives.map((obj, j) => (
                   <div key={j}>
-                    <span style={{ color: "#4ade80" }}>✓</span>{" "}
+                    <span style={{ color: "#e2b55a" }}>✓</span>{" "}
                     <span style={{ color: "#777" }}>{obj}</span>
                   </div>
                 ))}
@@ -1143,15 +1150,8 @@ export default function Portfolio() {
                 }}
               >
                 <span>
-                  dataset: <span style={{ color: "#e2b55a" }}>{job.metrics.dataset}</span>
-                </span>
-                {"  |  "}
-                <span>
-                  compute: <span style={{ color: "#e2b55a" }}>{job.metrics.compute}</span>
-                </span>
-                {"  |  "}
-                <span>
-                  duration: <span style={{ color: "#e2b55a" }}>{job.metrics.duration}</span>
+                  duration: <span style={{ color: "#e2b55a" }}>{job.duration ?? durationLabel(job.start, job.end)}</span>
+                  {!job.end && <span style={{ color: "#555" }}> (ongoing)</span>}
                 </span>
               </div>
 
@@ -1165,9 +1165,9 @@ export default function Portfolio() {
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
                       fontSize: 9,
-                      color: "#4ade80",
-                      border: "1px solid #4ade8022",
-                      background: "#4ade8008",
+                      color: "#777",
+                      border: "1px solid #222",
+                      background: "transparent",
                       padding: "3px 8px",
                       borderRadius: 3,
                       letterSpacing: 0.5,
@@ -1196,9 +1196,9 @@ export default function Portfolio() {
         >
           <span style={{ color: "#333" }}>$</span> pretrain.summary()
           <br />
-          base_capabilities: <span style={{ color: "#4ade80" }}>loaded</span>
+          base_capabilities: <span style={{ color: "#c9aa70" }}>loaded</span>
           <br />
-          ready_for_finetuning: <span style={{ color: "#4ade80" }}>True</span>
+          ready_for_finetuning: <span style={{ color: "#c9aa70" }}>True</span>
           <br />
           transfer_learning: <span style={{ color: "#e2b55a" }}>enterprise → builder</span>
         </div>
@@ -1225,7 +1225,7 @@ export default function Portfolio() {
           EPOCH 34 — FINE-TUNING DATA
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -1236,7 +1236,7 @@ export default function Portfolio() {
           }}
         >
           Projects
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -1283,7 +1283,7 @@ export default function Portfolio() {
           EPOCH 56 — MODEL ARCHITECTURE
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -1294,7 +1294,7 @@ export default function Portfolio() {
           }}
         >
           Architecture
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -1334,9 +1334,9 @@ export default function Portfolio() {
         >
           <span style={{ color: "#333" }}>$</span> model.summary()
           <br />
-          Total params: <span style={{ color: "#4ade80" }}>∞ (growing)</span>
+          Total params: <span style={{ color: "#c9aa70" }}>∞ (growing)</span>
           <br />
-          Trainable: <span style={{ color: "#4ade80" }}>Yes</span>
+          Trainable: <span style={{ color: "#c9aa70" }}>Yes</span>
           <br />
           Optimizer: <span style={{ color: "#e2b55a" }}>AdamW(curiosity, caffeine)</span>
           <br />
@@ -1367,7 +1367,7 @@ export default function Portfolio() {
           EPOCH 78 — CONVERGENCE ANALYSIS
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -1378,7 +1378,7 @@ export default function Portfolio() {
           }}
         >
           Loss Curve
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -1404,6 +1404,8 @@ export default function Portfolio() {
       </Section>
 
       {/* ===== OUTPUTS ===== */}
+      {/* With no linked outputs, keep only the anchor so old /#outputs links still land here. */}
+      {outputs.length === 0 ? <div id="outputs" className="portfolio-anchor" aria-hidden="true" /> : (
       <Section
         id="outputs"
         style={{
@@ -1424,7 +1426,7 @@ export default function Portfolio() {
           EPOCH 92 — MODEL OUTPUTS
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 40,
@@ -1435,7 +1437,7 @@ export default function Portfolio() {
           }}
         >
           Inference Results
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -1450,9 +1452,14 @@ export default function Portfolio() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {outputs.map((o, i) => (
-            <div
+            <a
               key={i}
+              href={o.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
+                color: "inherit",
+                textDecoration: "none",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -1494,11 +1501,13 @@ export default function Portfolio() {
                   {o.type}
                 </div>
               </div>
-              <span style={{ color: "#333", fontSize: 18 }}>→</span>
-            </div>
+              <span style={{ color: "#333", fontSize: 18 }} aria-hidden="true">↗</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           ))}
         </div>
       </Section>
+      )}
 
       {/* ===== CONTACT ===== */}
       <Section
@@ -1522,7 +1531,7 @@ export default function Portfolio() {
           EPOCH 100 — INFERENCE READY
         </div>
 
-        <h2
+        <SectionTitle
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 48,
@@ -1533,7 +1542,7 @@ export default function Portfolio() {
           }}
         >
           Run Inference
-        </h2>
+        </SectionTitle>
 
         <p
           style={{
@@ -1546,47 +1555,8 @@ export default function Portfolio() {
           The model is converged. Submit your prompt.
         </p>
 
-        {/* API-style contact */}
-        <div
-          style={{
-            textAlign: "left",
-            padding: "24px 28px",
-            border: "1px solid #1a1a1a",
-            borderRadius: 8,
-            background: "rgba(255,255,255,0.02)",
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            lineHeight: 2.2,
-            color: "#555",
-            maxWidth: 480,
-            margin: "0 auto",
-          }}
-        >
-          <span style={{ color: "#4ade80" }}>POST</span>{" "}
-          <span style={{ color: "#888" }}>/api/collaborate</span>
-          <br />
-          <span style={{ color: "#333" }}>Content-Type:</span> application/json
-          <br />
-          <br />
-          <span style={{ color: "#888" }}>{"{"}</span>
-          <br />
-          {"  "}
-          <span style={{ color: "#e2b55a" }}>"from"</span>
-          <span style={{ color: "#888" }}>: </span>
-          <span style={{ color: "#4ade80" }}>"you"</span>,
-          <br />
-          {"  "}
-          <span style={{ color: "#e2b55a" }}>"subject"</span>
-          <span style={{ color: "#888" }}>: </span>
-          <span style={{ color: "#4ade80" }}>"let's build something"</span>,
-          <br />
-          {"  "}
-          <span style={{ color: "#e2b55a" }}>"urgency"</span>
-          <span style={{ color: "#888" }}>: </span>
-          <span style={{ color: "#4ade80" }}>"high"</span>
-          <br />
-          <span style={{ color: "#888" }}>{"}"}</span>
-        </div>
+        {/* Working contact: opens the visitor's email app with the message. */}
+        <InferencePrompt />
 
         {/* Contact Links */}
         <div
@@ -1597,18 +1567,19 @@ export default function Portfolio() {
             marginTop: 40,
           }}
         >
+          {/* A link appears only with a real URL (Email, X and Instagram return once they have one). */}
           {[
-            { label: "Email", href: "#" },
-            { label: "Twitter/X", href: "#" },
+            { label: "Email", href: null },
+            { label: "Twitter/X", href: null },
             { label: "GitHub", href: "https://github.com/Ronaknowal" },
-            { label: "Instagram", href: "#" },
+            { label: "Instagram", href: null },
             { label: "LinkedIn", href: "https://www.linkedin.com/in/ronak-sharma-a6455a1b5/" },
-          ].map((link) => (
+          ].filter((link) => link.href).map((link) => (
             <a
               key={link.label}
               href={link.href}
-              target={link.href !== "#" ? "_blank" : undefined}
-              rel={link.href !== "#" ? "noopener noreferrer" : undefined}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: 11,
@@ -1643,7 +1614,7 @@ export default function Portfolio() {
             lineHeight: 2,
           }}
         >
-          model_version: 2025.02 | framework: life
+          model_version: {new Date().getFullYear()} | framework: life
           <br />
           built with curiosity, caffeine, and gradient descent
           <br />
